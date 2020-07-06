@@ -60,22 +60,22 @@ public class ProductController {
 		try {
 			ltResult = productRepository.findByCod(cod);
 		} catch (Exception e) {
-			log.error("productCod: {}", e.toString());
+			log.error("productFindCod: {}", e.toString());
 		}
 		return ltResult;
 	}
 
 	@ResponseBody
-	@GetMapping("/findname")
+	@GetMapping("like/{findname}")
 	@ApiOperation(value = "Returning product by name")
-	public List<Product> productFindName(@RequestBody Costumer product, String name) throws Exception {
+	public List<Product> productFindName(@RequestBody Costumer product, String findname) throws Exception {
 
 		log.info("Returning product by name");
 		List<Product> ltResult = null;
 		try {
-			ltResult = productRepository.findProductByName(name);
+			ltResult = productRepository.findProductByName(findname);
 		} catch (Exception e) {
-			log.error("costumerAll: {}", e.toString());
+			log.error("productFindName: {}", e.toString());
 		}
 		return ltResult;
 	}

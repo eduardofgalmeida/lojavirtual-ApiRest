@@ -1,6 +1,7 @@
 package com.eduardo.lojavirtual.models;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -28,6 +29,9 @@ public class Costumer implements Serializable {
 	@Column(name = "ID")
 	private long id;
 
+	@Column(name = "cod")
+	private BigDecimal cod;
+
 	@NotNull
 	@Column(name = "name")
 	private String name;
@@ -48,13 +52,20 @@ public class Costumer implements Serializable {
 
 	@OneToMany
 	private List<Adresses> adresses;
-	
+
 	@OneToMany
 	private List<Order> order;
-	
 
 	public long getId() {
 		return id;
+	}
+
+	public BigDecimal getCod() {
+		return cod;
+	}
+
+	public void setCod(BigDecimal cod) {
+		this.cod = cod;
 	}
 
 	public void setId(long id) {
@@ -116,9 +127,5 @@ public class Costumer implements Serializable {
 	public void setOrder(List<Order> order) {
 		this.order = order;
 	}
-	
-	
 
-	
-	
 }

@@ -1,5 +1,6 @@
 package com.eduardo.lojavirtual.controllers;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +41,9 @@ public class CostumerController {
 		log.info("Retornando todos os clientes ");
 		List<Costumer> ltResult = null;
 		try {
-			ltResult = costumerRepository.findAll();
+			if (ltResult.size() > 0) {
+				ltResult = costumerRepository.findAll();
+			}
 		} catch (Exception e) {
 			log.error("costumerAll: {}", e.toString());
 		}
@@ -48,23 +51,42 @@ public class CostumerController {
 	}
 
 	@ResponseBody
-	@GetMapping("/findname")
+	@GetMapping("/findcod")
+	@ApiOperation(value = "Returns all cod")
+	public List<Costumer> costumerFindcod(@RequestBody Costumer costumer, BigDecimal cod) throws Exception {
+
+		log.info("Returning all cod");
+		List<Costumer> ltResult = null;
+		try {
+			if (ltResult.size() > 0) {
+				ltResult = costumerRepository.findCostumerByCod(cod);
+			}
+		} catch (Exception e) {
+			log.error("costumerFindcod: {}", e.toString());
+		}
+		return ltResult;
+	}
+
+	@ResponseBody
+	@GetMapping("like/{findname}")
 	@ApiOperation(value = "Returns all customers")
-	public List<Costumer> costumerFindName(@RequestBody Costumer costumer, String name) throws Exception {
+	public List<Costumer> costumerFindName(@RequestBody Costumer costumer, String findname) throws Exception {
 
 		log.info("Returning all customers");
 		List<Costumer> ltResult = null;
 		try {
-			ltResult = costumerRepository.findCostumerByName(name);
+			if (ltResult.size() > 0) {
+				ltResult = costumerRepository.findCostumerByNameIgnoreCase(findname);
+			}
 		} catch (Exception e) {
-			log.error("costumerAll: {}", e.toString());
+			log.error("costumerFindName: {}", e.toString());
 		}
 		return ltResult;
 	}
 
 	@ApiOperation(value = "Register Costumer")
 	@PostMapping("/register")
-	//@PreAuthorize("hasrole('ADMIN')")
+	// @PreAuthorize("hasrole('ADMIN')")
 	public Costumer registerCostumer(@RequestBody Costumer costumer) {
 
 		log.info("Registering customer");
@@ -92,12 +114,11 @@ public class CostumerController {
 
 	@ApiOperation(value = "Updates Costumer")
 	@PutMapping("/update")
-	//@PreAuthorize("hasrole('ADMIN')")
+	// @PreAuthorize("hasrole('ADMIN')")
 	public Costumer updatesCostumer(@RequestBody Costumer costumer) {
 
 		Costumer result = new Costumer();
-		log.info("\r\n" + 
-				"Updating customer data");
+		log.info("\r\n" + "Updating customer data");
 		try {
 			result = costumerRepository.save(costumer);
 		} catch (Exception e) {

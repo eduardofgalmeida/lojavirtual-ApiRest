@@ -59,7 +59,7 @@ public class OrderController {
 		try {
 			ltResult = orderRepository.findByCod(cod);
 		} catch (Exception e) {
-			log.error("productCod: {}", e.toString());
+			log.error("orderFindCod: {}", e.toString());
 		}
 		return ltResult;
 	}
