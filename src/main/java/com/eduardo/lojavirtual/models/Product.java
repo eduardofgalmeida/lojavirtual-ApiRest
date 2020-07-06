@@ -8,9 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name="TB_PRODUCT")
@@ -23,12 +27,15 @@ public class Product implements Serializable {
 	@Column(name = "ID")
 	private long id;
 	
+	@NotNull
 	@Column(name = "cod")
 	private BigDecimal cod;
 	
+	@NotNull
 	@Column(name = "name")
 	private String name;
 	
+	@Lob
 	@Column(name = "description")
 	private String description;
 	
@@ -38,14 +45,12 @@ public class Product implements Serializable {
 	@Column(name = "amount")
 	private Integer amount;
 	
+	@NotNull
 	@Column(name = "price")
 	private Double price;
 	
 	@Column(name = "active")
 	private Integer active;
-	
-	@ManyToOne
-	private Order order;
 
 	public long getId() {
 		return id;
@@ -111,16 +116,6 @@ public class Product implements Serializable {
 		this.active = active;
 	}
 
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
 	
-	
-	
-
 	
 }

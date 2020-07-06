@@ -4,6 +4,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,6 +64,7 @@ public class CostumerController {
 
 	@ApiOperation(value = "Register Costumer")
 	@PostMapping("/register")
+	//@PreAuthorize("hasrole('ADMIN')")
 	public Costumer registerCostumer(@RequestBody Costumer costumer) {
 
 		log.info("Registering customer");
@@ -77,6 +79,7 @@ public class CostumerController {
 
 	@ApiOperation(value = "Delete Costumers")
 	@DeleteMapping("/delete/id/{id}")
+//	@PreAuthorize("hasrole('ADMIN')")
 	public void deleteCostumer(@RequestBody Costumer costumer, Long id) {
 
 		log.info("Deleting a client by id");
@@ -89,6 +92,7 @@ public class CostumerController {
 
 	@ApiOperation(value = "Updates Costumer")
 	@PutMapping("/update")
+	//@PreAuthorize("hasrole('ADMIN')")
 	public Costumer updatesCostumer(@RequestBody Costumer costumer) {
 
 		Costumer result = new Costumer();

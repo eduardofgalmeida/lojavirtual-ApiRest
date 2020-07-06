@@ -26,20 +26,16 @@ public class Adresses implements Serializable {
 	@Column(name = "ID")
 	private long id;
 	
-	@Column(name = "name")
-	private String name;
-	
-	@Column(name = "local")
-	private String local;
-	
-	@Column(name = "cep")
-	private String cep;
-	
+	@NotNull
 	@Column(name = "adresses")
 	private String adresses;
 	
+	@NotNull
 	@Column(name = "adresses_num")
 	private Integer adresses_num;
+	
+	@Column(name = "cep")
+	private String cep;
 	
 	@Column(name = "complement")
 	private String complement;
@@ -47,13 +43,89 @@ public class Adresses implements Serializable {
 	@Column(name = "neighborhood")
 	private String neighborhood;
 	
+	@NotNull
 	@Column(name = "city")
 	private String city;
 	
+	@NotNull
 	@Column(name = "state")
 	private String state;
 	
 	@ManyToOne
 	private Costumer costumer;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getAdresses() {
+		return adresses;
+	}
+
+	public void setAdresses(String adresses) {
+		this.adresses = adresses;
+	}
+
+	public Integer getAdresses_num() {
+		return adresses_num;
+	}
+
+	public void setAdresses_num(Integer adresses_num) {
+		this.adresses_num = adresses_num;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getComplement() {
+		return complement;
+	}
+
+	public void setComplement(String complement) {
+		this.complement = complement;
+	}
+
+	public String getNeighborhood() {
+		return neighborhood;
+	}
+
+	public void setNeighborhood(String neighborhood) {
+		this.neighborhood = neighborhood;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public Costumer getCostumer() {
+		return costumer;
+	}
+
+	public void setCostumer(Costumer costumer) {
+		this.costumer = costumer;
+	}
+
+
 
 }

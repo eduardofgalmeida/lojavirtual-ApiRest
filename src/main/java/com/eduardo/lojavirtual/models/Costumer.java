@@ -48,6 +48,10 @@ public class Costumer implements Serializable {
 
 	@OneToMany
 	private List<Adresses> adresses;
+	
+	@OneToMany
+	private List<Order> order;
+	
 
 	public long getId() {
 		return id;
@@ -104,9 +108,17 @@ public class Costumer implements Serializable {
 	public void setAdresses(List<Adresses> adresses) {
 		this.adresses = adresses;
 	}
+
+	public List<Order> getOrder() {
+		return order;
+	}
+
+	public void setOrder(List<Order> order) {
+		this.order = order;
+	}
 	
 	
 
-
+	
 	
 }

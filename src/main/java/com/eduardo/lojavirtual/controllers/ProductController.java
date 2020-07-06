@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,11 +31,11 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "API REST Product")
 public class ProductController {
 
+	private static final Logger log = LoggerFactory.getLogger(ProductController.class);
+	
 	@Autowired
 	ProductRepository productRepository;
-
-	private static final Logger log = LoggerFactory.getLogger(ProductController.class);
-
+	
 	@ResponseBody
 	@GetMapping("/all")
 	@ApiOperation(value = "Returns all products")
@@ -81,6 +82,7 @@ public class ProductController {
 
 	@ApiOperation(value = "Register Product")
 	@PostMapping("/register")
+	//@PreAuthorize("hasrole('ADMIN')")
 	public Product registerProduct(@RequestBody Product product) {
 
 		Product result = new Product();
@@ -95,6 +97,7 @@ public class ProductController {
 
 	@ApiOperation(value = "Delete Products")
 	@DeleteMapping("delete/id/{id}")
+	//@PreAuthorize("hasrole('ADMIN')")
 	public void deleteProduct(@RequestBody Product product, Long id) {
 
 		log.info("Deleting product");
@@ -107,6 +110,7 @@ public class ProductController {
 
 	@ApiOperation(value = "Updates Product")
 	@PutMapping("/update")
+	//@PreAuthorize("hasrole('ADMIN')")
 	public Product updatesProduct(@RequestBody Product product) {
 		Product result = new Product();
 

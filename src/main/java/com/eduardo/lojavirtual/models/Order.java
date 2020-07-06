@@ -1,6 +1,7 @@
 package com.eduardo.lojavirtual.models;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -9,11 +10,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name="TB_ORDER")
@@ -26,6 +29,10 @@ public class Order implements Serializable {
 	@Column(name = "ID")
 	private long id;
 	
+	@NotNull
+	@Column(name = "cod")
+	private BigDecimal cod;
+	
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy")
 	@Column(name = "date")
 	private LocalDate date;
@@ -33,14 +40,26 @@ public class Order implements Serializable {
 	@Column(name = "status")
 	private String status;
 	
+	@Lob
 	@Column(name = "comments")
 	private String comments;
 	
 	@OneToMany
 	private List<Product> product;
+
+	@ManyToOne
+	private Costumer costumer;
 	
 	public long getId() {
 		return id;
+	}
+	
+	public BigDecimal getCod() {
+		return cod;
+	}
+
+	public void setCod(BigDecimal cod) {
+		this.cod = cod;
 	}
 
 	public void setId(long id) {
@@ -78,5 +97,15 @@ public class Order implements Serializable {
 	public void setProduct(List<Product> product) {
 		this.product = product;
 	}
+
+	public Costumer getCostumer() {
+		return costumer;
+	}
+
+	public void setCostumer(Costumer costumer) {
+		this.costumer = costumer;
+	}
+	
+	
 	
 }
